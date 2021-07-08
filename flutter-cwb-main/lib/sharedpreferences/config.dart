@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cwb/mqtt/mqtt_config_form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// Test01
 
 class MqttConfig extends StatelessWidget {
   @override
@@ -39,11 +40,9 @@ class _ConfigState extends State<Config> {
       body: Column(
         children: [
           Text("MQTT Broker URL"),
-          TextField(
-              controller: _broker ),
+          TextField(controller: _broker),
           Text("ClientID"),
-          TextField(
-              controller: _clientid ),
+          TextField(controller: _clientid),
           RaisedButton(
               child: Text("Connect to Broker"),
               onPressed: () {
@@ -55,13 +54,15 @@ class _ConfigState extends State<Config> {
       ),
     );
   }
+
   void saveBroker() {
     String broker = _broker.text;
     saveBrokerPreference(broker).then((bool committed) {});
   }
+
   void saveClientid() {
     String clientid = _clientid.text;
-    saveClientidPreference(clientid).then((bool committed){});
+    saveClientidPreference(clientid).then((bool committed) {});
   }
 }
 
@@ -81,19 +82,18 @@ Future<bool> saveClientidPreference(String clientid) async {
 
 Future<String> getBrokerPreference() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String broker = prefs.getString ("broker");
+  String broker = prefs.getString("broker");
   return broker;
 }
 
 Future<String> getClientidPreference() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String clientid = prefs.getString ("broker");
+  String clientid = prefs.getString("broker");
   return clientid;
 }
 
-
 class NextPage extends StatefulWidget {
-  static String routeName ="/nextPage";
+  static String routeName = "/nextPage";
 
   @override
   _NextPageState createState() => _NextPageState();
@@ -109,6 +109,7 @@ class _NextPageState extends State<NextPage> {
     getClientidPreference().then(_updateClientid);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +118,6 @@ class _NextPageState extends State<NextPage> {
       ),
       body: Column(
         children: [
-
           Text(_broker),
           Text("check"),
           Text(_clientid),
@@ -138,4 +138,3 @@ class _NextPageState extends State<NextPage> {
     });
   }
 }
-
